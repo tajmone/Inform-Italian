@@ -1,0 +1,71 @@
+###############################################
+#  Inform 6 Italian:                          #
+#  https://github.com/tajmone/Inform-Italian  #
+###############################################
+
+root = true
+
+## Inform Files
+###############
+[*.{h,inf}]
+charset = unset
+indent_style = space
+indent_size = unset
+end_of_line = unset
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+## Configurations
+#################
+[.{git*,editorconfig,*.yml}]
+indent_style = space
+indent_size = unset
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+## Markdown GFM
+###############
+[*.md]
+indent_style = space
+indent_size = unset
+end_of_line = unset
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+## Shell Scripts
+################
+[*.sh]
+end_of_line = lf
+indent_style = tab
+indent_size = unset
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+## Plain-Text Files
+###################
+[*.{txt,oss,log}]
+charset = unset
+indent_style = space
+indent_size = unset
+end_of_line = unset
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[{LICENSE,README}]
+charset = unset
+indent_size = unset
+indent_style = space
+end_of_line = unset
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+# EOF #

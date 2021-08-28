@@ -1,0 +1,134 @@
+
+OSERVAZIONI PER INFIT 2.5
+*************************
+
+1. La libreria è una praticamente una conversione di INFIT 2.2
+   per assicurare la compatibilità con le librerie 6/11 e
+   specificatamente con Glulx. Nessuna annotazione particolare.
+   Vedere anche il file infit.log per le modifiche apportate.
+
+
+OSERVAZIONI PER INFIT 2.2
+*************************
+
+1. Questa è l'ultima versione di Infit prima della riscrittura da zero
+   della libreria (già iniziata). Vi prego di guardare con attenzione
+   le osservazioni in questo file e commentarle per darmi la
+   possibilità di capire come volete che proceda con il lavoro.
+
+
+OSSERVAZIONI PER INFIT 2.2 BETA 3
+*********************************
+
+1. Il problema in LanguageToInformese relativo alle parole che
+   terminano in "lo", "la", "li" e "le" (vedi osservazione 17 di INFIT
+   2.2 Beta 2) si ha solo quando la parola non è nel vocabolario
+   quindi se per esempio "stella" è nel vocabolario e "stalla" no, si
+   avrà:
+
+        x stella ---> x stella
+        x stalla ---> x stal essa
+
+   (ringrazio Massimiliano Bianchi per la segnalazione). Visto che ho
+   deciso di riprogettare da zero LanguageToInformese nella prossima
+   versione della libreria, per ora questo bug non viene corretto (può
+   capitare come dice Max solo quando c'è un errore di battitura).
+
+
+OSSERVAZIONI PER INFIT 2.2 BETA 2
+*********************************
+
+1. Francesco Cordella toglierebbe in ListMisscellany(22) la
+   virgola e metterebbe la parentesi, però in questo modo si
+   creerebbe un duplicato di ListMiscellany(21)
+
+2. Siccome è stato tolto "grida" come sinonimo di "rispondi"
+   bisogna reimplementarlo.
+
+3. Analogamente per "controlla" che è stato tolto dalla
+   grammatica di "esamina".
+
+4. Francesco Cordella ritiene la grammatica di Lock ("blocca")
+   particolarmente dannosa.
+
+5. Implementare, come suggerito da Vincenzo Scarpa i verbi "alzati"
+   (in che situazione va usato? è sinonimo di qualcosa già esistente o
+   bisogna creare una nuova azione?) e "balla"/"danza" (sono veramente
+   utili a tutti? non è forse meglio implementarli nel gioco?)
+
+6. Mangia, Indossa, Togli: Francesco Cordella toglierebbe held e
+   metterebbe noun (nella grammatica).
+
+7. Il generico verbo "fai" è ora gestito dalla routine GenericVerbSub.
+
+8. In una vecchia mail di Francesco Cordella viene sollevato un problema
+   con la grammatica di "Chiedi". Qual è il problema? Francesco, lo puoi
+   spiegare meglio? Qualcuno degli altri autori ha lo stesso problema?
+   Mi sembra che se ne è parlato anche su ICGAT, ma non ricordo la cosa...
+   Ecco le osservazioni originarie di Cordella:
+
+    1. Aggiungerei: reverse ad Askfor (problema di Askfor).
+    2. Aggiungerei un'ultima riga di grammatica, con creature noun;
+    3. Aggiungerei: * 'a'/'all^'/'allo'/'alla'/'al'/'agli'/'ai'/
+       'alle'/'ad' creature -> Ask. Altrimenti se faccio chiedi a creature
+       soltanto dice "non lo vedo"...
+      (E' sempre il problema di Askfor)
+
+9. Francesco Cordella toglierebbe "lancia" per Drop e lo metterebbe
+   a parte nella grammatica di ThrowAt. In questo modo però si elimina
+   la possibilità di usare frasi come "lancia il sasso" (senza specificare
+   a chi lanciarlo) che sebbene sia trattata allo stesso modo di "posa il
+   sasso" dà un maggior grado di "realismo" al parser...
+
+10. Francesco Cordella eliminerebbe "scassina", "sblocca" per UNLOCK.
+
+11. Francesco Cordella si chiede come mai "paga" sia sinonimo di "dai".
+    Rispondo dicendo di non dimenticare la differenza tra verbi e azioni.
+    Verbi anche diversi (non sinonimi in Italiano) sono sinonimi dal punto
+    di vista dell'azione generata. Pagare vuol dire semplicemente
+    "dare dei soldi a".
+
+12. Siccome è cambiata la grammatica del verbo cerca in modo da gestire
+    anche l'azione CONSULT, controllare che non si sovrapponga ambiguamente
+    con altre grammatiche (mi sembra che in una prima versione di INFIT c'era
+    il supporto per quest'azione ma l'ho tolto proprio per questo motivo).
+
+13. Paolo Lucchesi mi scrive in una email che ci sono degli errori
+    nell'inventario in presenza di oggetti con attributi light e worn.
+    Più precisamente quali errori? Qualcuno oltre a Paolo ha riscontrato
+    lo stesso problema?
+
+14. Dopo il cambiamento della gestione di "attacca" si viene a creare una
+    ambiguità nella forma "attacca [qualcosa] con [oggetto]" che genera sempre
+    e comunque l'azione ATTACK e non TIE ("attacca bici con la catena").
+    Si potrebbe ovviare alla cosa distinguendo il "[qualcosa]" tra CREATURE
+    (genera ATTACK) e NOUN (genera TIE). Oppure lasciare NOUN e implemantare
+    qualche routine di parsing?
+
+15. In che modo gestire i verbi "mettiti" e "togliti"? Io penso che "mettiti"
+    dovrebbe generare l'azione ENTER ("mettiti nell'armadio"), mentre
+    "togliti" l'azione EXIT. Che dite?
+
+16. Bisogna trovare il modo migliore per gestire "chiedi argomento a creatura"
+    e "parla di argomento a creatura". Ci sono dei problemi, come evidenziato
+    da Paolo Lucchesi. Suggerimenti? Altre segnalazioni? Quali sono i problemi
+    in dettaglio?
+
+17. C'è un fastidiosissimo bug con quei nomi che terminano con "lo", "la",
+    "li", "le". In pratica nel caso dei verbi queste particelle vengono
+    trattate, giustamente, come pronomi e quindi un comando tipo
+    "esaminalo" viene trasformato da LanguageToInformese in "esamina esso".
+    Il problema è che anche alcuni sostantivi (non verbi, quindi) vengono
+    trattati allo stesso modo. Ad esempio (come mi segnala Massimiliano
+    Bianchi) un comando tipo "x stalla" viene trasformato in "x stal essa".
+    Il problema è che non posso neanche filtrare la routine ai soli verbi
+    perchè LanguageToInformese è eseguita prima del parsing e quindi a quel
+    punto il parser ancora non sa quale sia il verbo della frase. Potrei
+    applicare la trasformazione alla solo prima parola del comando (che di
+    solito è sempre il verbo). Suggerimenti?
+
+18. C'è ancora un bug con la routine PrintCommand in replace.h usata quando
+    il parser inferisce nei comandi del giocatore scegliendo, a seconda
+    del verbo, l'oggetto in scope più opportuno. Lo correggerò nella prossima
+    versione beta in cui penso di riscrivere completamente la PrintCommand
+    includendo anche la gestione delle due routine PrintPrep e PrintInfinitive.

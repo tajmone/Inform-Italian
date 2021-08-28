@@ -6,9 +6,25 @@ Repository dedicato alle risorse in lingua italiana per creare avventure testual
 
 Progetto creato da [Tristano Ajmone], 28 agosto, 2021.
 
+
 -----
 
-# Link Utili
+**Indice**
+
+<!-- MarkdownTOC autolink="true" bracket="round" autoanchor="false" lowercase="only_ascii" uri_encoding="true" levels="1,2,3" -->
+
+- [Contenuti del progetto](#contenuti-del-progetto)
+- [Link utili](#link-utili)
+
+<!-- /MarkdownTOC -->
+
+-----
+
+# Contenuti del progetto
+
+- [`/infit/`](./infit/) — Libreria italiana INFIT v2.5, di Giovanni Riccardi, 2004.
+
+# Link utili
 
 - [www.vincenzoscarpa.it] — Sito di Vincenzo Scarpa, dedicato alle risorse di Inform per la lingua italiana.
 - [Wikibooks » Inform e Glulx] — Versione online del manuale di Vincenzo Scarpa.

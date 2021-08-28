@@ -1,0 +1,51 @@
+
+INFIT 2.5
+*********
+
+A poco più di sei mesi dalla 2.2 eccomi qui a presentare la versione 2.5 di INFIT.
+Premetto subito che si tratta di una versione intermedia prima del rilascio di
+INFIT 3 che seguirà questa release di qualche settimana.
+Versione intermedia significa essenzialmente che questo INFIT non è niente
+altro che la versione 2.2 con l'aggiunta del supporto Glulx e della
+compatibilità con le recenti librerie 6/11 (che aggiungono alle 6/10, tra le
+molte correzioni e alcune nuove funzionalità, anche nuovi messaggi).
+
+La scelta di rilasciare una versione intermedia tra INFIT 2.2 e INFIT 3
+è dipesa soprattutto dal fatto di avere al più presto una libreria
+compatibile con Glulx. Ringrazio naturalmente Alessandro Schillaci che
+per primo ha compreso questa necessità e ha messo una pezza al mio INFIT
+con le sue librerie 2.2 modificate. Queste però non utilizzavano il file
+Replace.h (che contiene varie personalizzazioni delle routine di
+libreria), non traducevano i nuovi messaggi introdotti nella libreria 6/11
+e c'erano alcune parti non compatibili ancora con Glulx.
+
+La libreria modificata di Alessandro è stata importante perché ha permesso
+a molti di cominciare a testare la piattaforma Glulx senza dover aspettare
+quel pigrone del sottoscritto (pare che io sia intelligente ma non mi
+applico, secondo un simpatico sondaggio recentemente fatto su IF-Italia).
+
+:-)
+
+
+Altro motivo del rilascio di una versione intermedia dipende dalla riscrittura
+quasi totale del codice che sto portando avanti con INFIT 3: sicuramente la
+prima versione che rilascerò sarà piena di errori e necessiterà di un test
+approfondito. Insomma, avere una libreria stabile è una necessità per tutti
+gli autori di avventure che non possono pubblicare le loro opere con
+un parser pieno di bug.
+
+
+Segnalazioni di bug, commenti e osservazioni vanno fatti come sempre
+all'indirizzo infit@inform-italia.org anteponendo all'oggetto del
+messaggio la stringa [INFIT 2.5]. Al più presto verrà preparata una pagina
+sul sito che si occuperà delle segnalazioni dei bug rendendo non più
+necessario l'invio delle segnalazioni via email.
+
+
+HAPPY INFORMING!
+
+
+
+Giovanni Riccardi
+giovanni@composizioni.net
+Terracina (LT), 14 Ottobre 2004

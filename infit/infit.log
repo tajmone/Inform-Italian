@@ -1,0 +1,786 @@
+
+
+INFIT.LOG - CAMBIAMENTI E CORREZIONI IN INFIT
+Giovanni Riccardi
+
+
+CAMBIAMENTI DA INFIT 2.2 A INFIT 2.5
+************************************
+
+14 Ottobre 2004
+===============
+In generale i cambiamenti hanno riguardato la compatibilità con le
+librerie 6/11 (quindi alcune modifiche alla bussola e alle direzioni,
+qualche messaggio di libreria aggiuntivo e tre routine in più per
+gestire i messaggi del parser). Inoltre sono state modificate tutte
+quelle parti di INFIT che necessitavano di doppio codice ZCODE/GLULX.
+
+La libreria non presenta quindi alcuna funzionalità nuova o diversa
+rispetto alla versione 2.2. La vera novità è la piena compatibilità
+con Glulx. Se ci sono errori e/o bug, questi o sono presenti anche
+nella versione 2.2 o sono specifici del codice modificato per la
+compatibilità con Glulx.
+
+Per maggiori informazioni sui cambiamenti nella libreria 6/11 vedere
+le Release Notes di quest'ultima.
+
+
+CAMBIAMENTI DA INFIT 2.2 BETA 3 A INFIT 2.2
+*******************************************
+
+24 Marzo 2004
+=============
+
+1. Preparata la versione ufficiale di Infit 2.2, l'ultima prima della
+   riscrittura totale (già iniziata) della libreria. D'ora in avanti
+   verranno corretti solo bug veramente importanti.
+
+
+27 Febbraio 2004
+================
+
+1. ItalianG.h, corretto bug con la grammatica del verbo Parla. C'erano
+   problemi con comandi del tipo "Parla con creatura". I problemi
+   dipendevano dall'ordine in cui erano definite le varie forme della
+   grammatica.
+   (segnalazione di Paolo Lucchesi)
+
+2. replace.h, corretto un bug riguardante la stampa dei messaggi quando
+   il parser inferiva nei comandi del gioco. In pratica non veniva
+   stampato nessuno spazio tra il verbo e l'oggetto. Ero a conoscenza di
+   questo bug (l'avevo generato ip, in qualche modo), perché ne causava
+   un altro.
+   (segnalazione di varie persone)
+
+CAMBIAMENTI DA INFIT 2.2 BETA 2 A INFIT 2.2 BETA 3
+**************************************************
+
+20 Gennaio 2004
+===============
+
+1. Preparata la beta 3 di Infit 2.2
+
+
+6--19 Gennaio 2004
+==================
+
+1. ItalianG.h, corretto bug nella gramatica di Guarda introdotto nella
+   beta 2 con la gestione di comandi come "guarda con attenzione" e
+   "guarda attentamente" (vedi punto 18 nei cambiamenti da beta 1 a
+   beta 2). Praticamente il giocatore poteva digitare comandi come
+   "guarda attentamente attenzione", ma non "guarda attentamente". Ora
+   le due forme sono state rese esclusive (una esclude l'altra) e
+   hanno la grammatica indipendente. Analogamente per la grammatica di
+   "esamina".
+   (segnalazione di Paolo Maroncelli).
+
+
+
+CAMBIAMENTI DA INFIT 2.2 BETA 1 A INFIT 2.2 BETA 2
+**************************************************
+
+
+25 Dicembre 2003
+================
+
+1. Preparata la beta 2 di Infit 2.2
+
+
+22--25 Dicembre 2003
+====================
+
+
+1. Italiang.h, riga 95, corretto il verbo script (trascrizione). Avevo
+   messo "disattivata" al posto di "attivata"
+   (segnalazione di Paolo Vece)
+
+2. Italian.h, corretto messaggio 2 del verbo SwitchOn. Per gli oggetti
+   femminili accesi veniva stampato "è già accesoa". Ho cambiato "acceso"
+   in "acces".
+   (segnalazione di Marco Totolo)
+
+3. Italian.h, corretta routine di stampa ArtDi, che erroneamente stampava
+   "di tede te stesso" quando era riferita al player. Mi ero dimenticato
+   di ritornare dopo il primo if.
+   (segnalazione di Marco Totolo)
+
+4. Italian.h, eliminato spazio superfluo in Examine(1)
+   (segnalazione di Vincenzo Scarpa)
+
+5. Italian.h, in Examine(3) ho cambiato "acceso" in "acces" perché
+   la routine stampava "accesoa" per i nomi femminili.
+   (segnalazione di Vincenzo Scarpa)
+
+6. Italian.h, aggiunto in LanguageToInformese il supporto per "dammi"
+   che viene trasformato in "da a me".
+   (segnalazione di Paolo Lucchesi)
+
+7. Italiang.h, aggiunti token "fra" e "tra" nella grammatica di Guarda
+   e Cerca.
+   (segnalazione di Giancarlo Niccolai)
+
+8. Italian.h, corretta la frase del verbo "Blow" (l'avevo tradotto con
+   "distruggere" anziché "soffiare", e non so per quale motivo).
+   (segnalazione di Vincenzo Scarpa)
+
+9. Italian.h, aggiunto un punto finale alle frasi Eat(1) e Burn.
+   (segnalazione di Vincenzo Scarpa)
+
+10. Italian.h, sostituito (artda) con (artdi) nel messaggio Take(7).
+    (segnalazione di Vincenzo Scarpa)
+
+11. Italian.h, sostituito "vedere" con "guardare" in Search(5).
+    (segnalazione di Francesco Cordella)
+
+12. Italiang.h, tolto "grida" come sinonimo di "rispondi".
+    (segnalazione di Francesco Cordella)
+
+13. Italiang.h, tolto "controlla" come sinonimo di "esamina".
+    (segnalazione di Francesco Cordella)
+
+14. Italiang.h, aggiunto token "per" nella grammatica di "sali".
+    (segnalazione di Francesco Cordella)
+
+15. Italiang.h, aggiunto "picchia" come sinonimo di ATTACK.
+    (segnalazione di Francesco Cordella e Paolo Lucchesi)
+
+16. Italiang.h, aggiunti "ricarica", "riprendi", "load" come sinonimi
+    di "restore".
+    (segnalazione di Francesco Cordella)
+
+17. Italiang.h, cambiata in questo modo la grammatica di "cerca":
+
+    Verb 'cerca' 'trova' 'ricerca' 'fruga'
+    !           * noun                           -> Search
+                * 'dentro'/'in'/'nel'/'nello'/'nell^'/'nella'/
+                  'negli'/'nelle'/'nei'/'fra'/'tra' noun
+                                                 -> Search
+                * topic 'dentro'/'in'/'nel'/'nello'/'nell^'/'nella'/
+                  'negli'/'nelle'/'nei'/'fra'/'tra' noun
+                                                 -> Consult reverse
+                * 'dentro'/'in'/'nel'/'nello'/'nell^'/'nella'/
+                  'negli'/'nelle'/'nei'/'fra'/'tra' noun topic
+                                                 -> Consult;
+
+    Ora non si può più usare un comando tipo "cerca il cubo" (che
+    dovrebbe fare il giocatore andare in giro per la stanza finché
+    non trova l'oggetto in questione?) ed è stato aggiunto il supporto
+    per frasi tipo "cerca [qualcosa] nell'enciclopedia" e
+    "cerca nell'enciclopedia [qualcosa]".
+    (segnalazione di Paolo Maroncelli)
+
+18. Italiang.h, cambiata la grammatica di Guarda:
+
+    Verb 'guarda' 'g//' 'vedi' 'l//'
+                *                                -> Look
+                * noun                           -> Examine
+                * 'dentro'/'in'/'nel'/'nello'/'nell^'/'nella'/
+                  'negli'/'nelle'/'nei'/'attraverso'/
+                  'su'/'sul'/'sullo'/'sull^'/'sulla'/'sui'/
+                  'sugli'/'sulle'/'sopra'/'tra'/'fra' noun
+                                                 -> Search
+                * 'attentamente'/'con' 'attenzione' noun
+                                                 -> Search
+                * noun 'attentamente'/'con' 'attenzione'
+                                                 -> Search
+                * 'sotto' noun                   -> LookUnder;
+
+    e di Esamina:
+
+    Verb 'esamina' 'x//' 'descrivi'
+                * noun                           -> Examine
+                * 'attentamente'/'con' 'attenzione' noun
+                                                 -> Search
+                * noun 'attentamente'/'con' 'attenzione'
+                                                 -> Search;
+
+    Ora, entrambi i verbi gestiscono anche frasi tipo "esamina attentamente
+    l'armadio" che genera l'azione SEARCH.
+    (segnalazione di Paolo Maroncelli)
+
+19. Italiang.h, cambiata la grammatica del verbo scendi invertendo le prime
+    due righe in modo che in presenza di più oggetti enterable supporter il
+    parser non inferisca con l'altro oggetto.
+    (segnalazione di Paolo Maroncelli)
+
+20. Italiang.h, aggiunta alla grammatica di "spingi" la seguente riga
+
+            * noun 'verso'/'a' noun=ADirection  -> PushDir
+
+    in modo da gestire frasi del tipo "spingi [qualcosa] verso nord".
+    (segnalazione di Paolo Lucchesi)
+
+21. Italiang.h, aggiunta la gestione di "accacca [qualcosa] a
+    [qualcos'altro]" come sinonimo dell'azione TIE. Ho quindi
+    separato attacca da "rompi", "colpisci", ecc. (che generano l'azione
+    ATTACK) e ho creato la nuova grammatica per il solo ATTACCA:
+
+    Verb 'attacca'
+                * noun                           -> Attack
+                * noun 'con'/'col' held          -> Attack
+                * noun 'a'/'ad'/'all^'/'allo'/'alla'/'al'/'agli'/'ai'/
+                  'alle'  noun                   -> Tie;
+
+
+    Il problema è che ora non si possono usare comandi tipo "attacca la
+    bici con la catena" perché altrimenti ci sarebbe conflitto (si può
+    comunque sempre usare "lega bici con la catena").
+    (segnalazione di Paolo Lucchesi)
+
+22. Italian.h, aggiunto il supporto per "giu'" tra i nomi delle direzioni.
+    (segnalazione di Paolo Lucchesi)
+
+23. Italiang.h, tolto "mettiti" come sinonimo di "metti". Aspetto commenti
+    per la gestione della grammatica.
+
+24. Italiang.h, aggiunti "versa" e "rovescia" come sinonimi di "svuota".
+    (segnalazione di Paolo Lucchesi)
+
+25. Italian.h, corretta Miscellany(5): da "...PUNTEGGIO COMPLETO..." a
+    "...punteggio COMPLETO...".
+    (segnalazione di Paolo Lucchesi)
+
+26. Italian.h, corretta EmptyT(1). Veniva stampato " non è un contenitore."
+    anziché "L'oggetto non è un contenitore."
+    (segnalazione di Massimiliano Bianchi e Marco Totolo)
+
+27. Italian.h, aggiunto in LanguageToInformese il supporto per il verbo
+    "ANNULLARE", che è una delle opzioni che vengono date al giocatore
+    alla fine di una partita. ANNULLARE viene semplicemente trasformato in
+    ANNULLA che è correttamente riconosciuta dal parser.
+    (segnalazione di Ignazio Di Napoli)
+
+28. Italian.h, corretto un fastidiosissimo bug segnalato praticamente da
+    tutti che riguardava la stampa delle funzioni articolo (artdi, artsu
+    e simili) quando il nome che seguiva era maschile, plurale e iniziava
+    con una vocale (praticamente tutti quelli che vogliono come articolo
+    "gli", ad esempio "gli alberi"). A causa del bug in questione veniva
+    stampato "suglialberi" anziché "sugli alberi". Alla fine l'errore
+    non era nelle routine articolo, ma semplicemente mancava uno spazio
+    a "gli" nell'array LanguageArticles dove sono memorizzate tutte le
+    varie forme di articoli.
+    (segnalazione di molti, ma risolto grazie ad un approfondito test
+    di Massimiliano Bianchi)
+
+29. Italian.h, aggiunto il punto alla fine della frase Open(1).
+    (segnalazione di Massimiliano Bianchi)
+
+30. Italian.h, analogamente per SwitchOn(1) e SwitchOff(1)
+    (segnalazione di Marco Totolo)
+
+
+
+
+CAMBIAMENTI DA INFIT 2.1 A INFIT 2.2 BETA 1
+*******************************************
+
+
+13 Gennaio 2003
+===============
+
+1. Preparata la beta 1 di Infit 2.2
+
+
+11 Gennaio 2003
+===============
+
+1. C'è un piccolo bug in PrintCommand(). Ho inavvertitamente eliminato
+   la stampa dello spazio. Non lo correggo perché tanto nella beta 2
+   mi concentrerò proprio sulla riscrittura completa di PrintCommand.
+   (segnalazione di Tommaso Caldarola)
+
+2. Inserito il seguente messaggio in fase di compilazione:
+
+   message "^Using Infit v2.2 Beta 1 / Serial: 030113 / (c) 2003 by Giovanni
+        Riccardi^";
+
+   In modo da sapere subito che versione di Infit si sta utilizzando,
+   quando si compila un gioco.
+   (suggerimento di Tommaso Caldarola)
+
+
+
+9 Gennaio 2003
+==============
+
+1. Corretto il bug seguente:
+
+        > Esamina me stesso
+        Hai sempre lo stesso bell'aspetto
+
+        > Esamina me
+        Cosa vuoi esaminare?
+
+   Il problema era naturalmente in LanguageToInformese: ogni
+   riferimento a "me" successivo a "me stesso" causava il problema.
+   La cosa strana è che scrivendo un'altra volta "Esamina me" il
+   problema non compariva. Ho studiato a fondo la cosa e sono arrivato
+   alla conclusione che sia un bug della libreria standard e non di
+   Infit. Infatti l'array parse non viene "azzerato" ma
+   semplicememente aggiornato con le nuove informazioni. quindi dopo
+   il primo comando parse->1 == 3, cioè tre parole di cui la seconda è
+   "me" e la terza è "stesso". Questa situazione viene riconosciuta da
+   LTI come patologica e viene eleminato "me" in modo che "stesso"
+   venga riconosciuta come una delle ME__WD. A questo punto digitando
+   il secondo comando parse viene aggiornato e si ha parse->1 == 2.
+   LTI continua comunque a leggere parse anche oltre la sua lunghezza
+   riconoscendo la presenza della parola "stesso" che invece è rimasta
+   dal comando precedente. Ho risolto il problema facendo un test sul
+   numero di parole, ma secondo me l'array parse dovrebbe essere
+   riazzerato dopo ogni comando. Non so perché la libreria standard
+   non lo faccia (serve per l'undo, forse? mi devo documentare), ma
+   lasciare memorizzate parole anche dopo che il comando è stato
+   processato è sempre fonte di errori.
+   (segnalazione di Paolo Maroncelli)
+
+
+
+8 Gennaio 2003
+==============
+
+1. Cambiata la sintassi del verbo scala, sali, ecc. Ho in pratica
+   aggiunto la preposizione 'a' in modo da utilizzare anche comandi
+   del tipo "sali a cavallo". Nel gioco di Paolo Lucchesi "La pietra
+   della luna" digitando quel comando la preposizione 'a' veniva
+   interpretato come l'oggetto soffitto della bussola.
+   (segnalazione di Tommaso Caldarola)
+
+2. Cambiate le routine Banner() e VersionSub() in replace.h in modo
+   che gestiscano meglio la stampa delle informazioni sul gioco e su
+   Infit in particolare. A proposito di quest'ultimo ho introdotto due
+   nuove costanti (LanguageSerial e LanguageCopyright) e diviso
+   l'informazione che prima era contenuta in LanguageVersion nelle tre
+   stringhe. Ho corretto di conseguenza anch un piccolo bug che
+   consisteva nella stampa di LanguageVersion per due volte vella
+   routine VersionSub().
+
+
+
+
+6 Gennaio 2003 - DA INFIT 2.1 BETA 4 A INFIT 2.1 (RELEASE UFFICIALE)
+********************************************************************
+
+1. Tolto uno spazio alle due costanti IS2__TX e ARE2__TX nel file
+   Italian.h. Nella descrizione di oggetti Supporter e Container (frasi
+   ListMiscellany #19 e #21) compariva infatti un doppio spazio.
+   (segnalazione di Paolo Lucchesi)
+
+
+
+
+29 Dicembre 2002 - Da INFIT 2.1 BETA 3 A INFIT 2.1 BETA 4
+*********************************************************
+
+1. Modificate le routine ArtDa, ArtSu, ecc. in modo da gestire anche
+   l'oggetto player. Ad esempio se faccio "(artda) o" e "o == player"
+   allora viene stampato "da te". Analogamente tutte le altre.
+   (suggerimento di Giancarlo Niccolai)
+
+2. Cambiata (ancora una volta) la frase 4 di Look. Praticamente nella
+   chiamata alla routine Writelist è stato cambiato il parametro
+   PARTINV_BIT con FULLINV_BIT. In questo modo gli oggetti visibili
+   vengono elencati senza frasi del tipo "(che è vuoto)". Ditemi se
+   preferite questa soluzione alla precedente.
+   (suggerimento di Franceso Cordella)
+
+
+3. Corretto errore nella routine PrintCommand di replace.h che causava
+   situazioni del genere:
+
+   > INSERISCI
+     (dalla cassettiera)
+
+   Praticamente veniva chiamata (artda) al posto di (artin) perché
+   io testavo solo il primo carattere della preposizione (se è 'd'
+   allora chiamo artda, se è 'i' allora artin, ecc), ma non mi ero
+   reso conto che molti verbi hanno come primo termine della
+   grammatica "dentro". Ora la routine è la seguente:
+
+     [ PrintCommand from i k spacing_flag prepos p pr;
+
+       (...)
+            p = prepos->2;
+            switch(p)
+            {
+             'a': pr = 1; continue;
+             's': pr = 2; continue;
+             'd': if (prepos->3 == 'e') pr =4; else pr = 3; continue;
+             'i': pr = 4; continue;
+             default: print (address) No__Dword(i - REPARSE_CODE); continue;
+            }
+
+        (...)
+      ];
+
+      (segnalazione di Francesco Cordella)
+
+4. Corretto un bug che mi ha fatto letteralmente impazzire. La
+   situazione in pratica era la seguente: quando il parser doveva
+   completare una frase o chiedere al giocatore di specificare meglio
+   il comando, la StatusLine cambiava "magicamente". Senza
+   assolutamente intervenire sulla variabile che gestisce il tempo
+   (the_time) scomparivano le scritte "Azioni: " e  "Punti: " e
+   compariva "Tempo:" (dove però quest'ultimo era calcolato in base
+   ai valori di azioni e punti). La cosa strana era che l'errore
+   sembrava non essere assolutamente dipendente da Infit. Pensavo a
+   qualche bug dell'interprete (nelle stesse situazioni l'interprete
+   Frobnitz mandava addirittura in crash il mio palmare), ma alla fine
+   la cosa è stata più semplice di quanto pensassi. L'errore era di
+   aver dichiarato un array tra le variabili della funzione
+   PrintCommand in Replace.h e in PrintPrep in Italian.h. L'array
+   veniva usato in tre righe di assembly come queste:
+
+         @output_stream 3 prepos;
+         print (address) No__Dword(i - REPARSE_CODE);
+         @output_stream -3;
+
+   che servivano a copiare la preposizione all'indirizzo
+   i-REPARSE_CODE nell'array prepos. Quest'ultimo poi viene usato per
+   la stampa delle preposizioni. Concludendo ho aggiunto il seguente
+   codice
+
+         Array pre --> 101;
+
+   prima di PrintCommand e il seguente
+
+         Array prepos --> 51;
+
+   prima di PrintPrep (ho diversificato le due situazioni perché la
+   seconda stampa solo la preposizione mentre la prima anche il noun o
+   il second). In PrintCommand ho poi modificato così il codice:
+
+          pre-->0 = 100;
+          @output_stream 3 pre;
+          print (address) No__Dword(i - REPARSE_CODE);
+          @output_stream -3;
+
+   e analogamente in PrintPrep.
+   (segnalazione di Tommaso Caldarola)
+
+5. Cambiata frase 1 di Exit da:
+
+          1: "Esci? E da dove? Dovresti spiegarti meglio.";
+
+   a:
+
+          1: "E da dove? Dovresti spiegarti meglio.";
+
+   In questo modo la frase va bene anche per il verbo scendi (che
+   genera l'azione Exit).
+   (segnalazione di Francesco Cordella)
+
+6. Inserito nella grammatica "rifletti" come sinominmo di "pensa"
+   (suggerimento di Francesco Cordella)
+
+7. Inserita nella grammatica la preposizione articolata 'col' per
+   tutti i verbi che utilizzano la preposizione 'con'.
+   (suggerimento di Paolo Lucchesi)
+
+8. Grammatica del verbo lascia, lancia, ecc.: aggiunte le preposizioni
+   in, nel, ecc. per ThrowAt.
+   (segnalazione di Francesco Cordella)
+
+9. Sistemata la grammatica dei verbi agita e saluta: ho commentato
+   alcune forme per non generare conflitti nelle risposte del
+   parser. Se eventualmente vi dovessero servire nei vostri giochi
+   potete sempre implementarle (gestendo però i conflitti).
+
+        Verb 'agita' 'agitati'
+        !       *                                -> WaveHands
+        !       *'mani'                          -> WaveHands
+                * noun                           -> Wave;
+
+        Verb 'saluta'
+        !       *                                -> WaveHands
+                * creature                       -> WaveHands;
+
+   (segnalazione di Francesco Cordella)
+
+10. Cambiata routine Banner in Replace.h in modo da visualizzare anche
+    le informazioni sulla versione di Infit.
+    (suggerimento di Francesco Cordella)
+
+
+
+
+14 Dicembre 2002 - Da INFIT 2.1 BETA 2 A INFIT 2.1 BETA 3
+*********************************************************
+
+1. Ora le due routine isorare e cisorare gestiscono anche il caso in
+   cui l'oggetto è il giocatore. Ecco il nuovo codice:
+
+       [ IsorAre obj;
+         if (obj == player) print "sei";
+         else
+            if (obj has pluralname) print "sono"; else print "@`e";
+       ];
+
+   E analogamente in CisorAre
+   (suggerimento di Giancarlo Niccolai)
+
+
+2. Corretto errore nella frase 3 di Enter
+   (segnalazione di Paolo Lucchesi)
+
+
+3. Cambiata la frase 7 di Take in modo da sfruttare la routine
+   (artda). Ecco la nuova frase
+
+     7: if (noun has pluralname) print "Sembrano ";
+        else print "Sembra ";
+        "essere parte ", (artda) x1, ".";
+
+   (segnalazione di Tommaso Caldarola)
+
+
+4. Corretta frase 42 di Miscellany (ho aggiunto un new_line alla
+   fine). La frase è ora la seguente:
+
+     42: if (x1==0) print "Nessuno";
+         else print "Solamente ", (number) x1;
+         print " ne ";
+         if (x1==1 || x1==0) { print "@`e disponibile.^";}
+         else print "sono disponibili.^";
+
+   (segnalazione di Tommaso Caldarola)
+
+
+5. Corretta la routine Articolo che era richiamata da (artda) e
+   simili. L'errore avveniva con oggetti maschili il cui articolo
+   determinativo era il. Praticamente (artda) obj stampava ad esempio
+   "dalil carro" al posto di "dal carro". La cosa veramente strana è
+   che il codice era giusto dal punto di vista logico: ho
+   semplicemente sostituito
+
+   if (o has male)
+
+   con
+
+   if (o hasnt female)
+
+   e ora tutto funziona benissimo. Quando c'è un oggetto femminile
+   bisogna dichiararlo esplicitamente con un attributo female, mentre
+   questo non succede nel caso di oggetti maschili che è il genere di
+   default. Fino ad ora avevo pensato che la libreria assegnasse un
+   attributo male a tutti gli oggetti in cui il genere non era
+   dichiarato, ma evidentemente il genere è determinato nelle altre
+   parti della libreria con un calcolo del GNA. Ho preferito lasciare
+   la verifica esplicita dell'atributo al posto di usare GetGNAOfObj
+   perché il codice è così più semplice da leggere e poi perchè in
+   Italiano se un oggetto non è femminile è per forza maschile (non
+   c'è il neutro). Ecco la nuova routine:
+
+[ Articolo o pluralise i;
+    StorageForShortName-->0 = 160;
+    @output_stream 3 StorageForShortName;
+    if (pluralise) print (number) pluralise; else print (PSN__) o;
+    @output_stream -3;
+
+    if ((o has pluralname) && (o hasnt female))
+    {
+        print (the) o;
+        return;
+    }
+    else
+    {
+        print "l";
+        i = LanguageContraction(StorageForShortName + 2);
+        if ((i == 2) && (o hasnt female))
+        {
+            print " ", (name) o;
+            return;
+        }
+        else
+        {
+            print (the) o;
+        }
+    }
+];
+
+   (segnalazione di Tommaso Caldarola e Paolo Lucchesi)
+
+
+7. Corretta frase 4 di Look. Praticamente, nella beta 2,  avevo
+   eliminato un ISARE_BIT nella chiamata a WriteListFrom
+   dimenticandomi di aggiungere "vedi" prima della chiamata. La frase
+   era richiamata nell'azione look con i supporter scenery. Ecco la
+   frase corretta:
+
+     4: print "^Sopra ", (the) x1, " vedi ";
+        WriteListFrom(child(x1),
+                      ENGLISH_BIT + RECURSE_BIT + PARTINV_BIT +
+                      TERSE_BIT + CONCEAL_BIT);
+        ".";
+
+   (segnalazione di Francesco Cordella e Paolo Lucchesi).
+
+
+8. Cambiata frase 27 di Miscellany da:
+
+   "Non riesco a capire la frase."
+
+   in
+
+   "Cosa vuoi dire? Non riesco a capire."
+
+   Mi sembra una forma meno asettica e più colloquiale.
+
+
+9. Corretta frase di Wake. C'era una virgola al posto del punto.
+
+
+
+
+25 Ottobre 2002 - Da INFIT 2.1 BETA 1 A INFIT 2.1 BETA 2
+********************************************************
+
+1. Corretto forse uno degli ultimi bug "pericolosi" della libreria.
+   Praticamente in LanguageToInformese ho cambiato la linea
+        len = parse->(x*2 + 4);
+    con:
+        len = parse->(x*4 + 4);
+   Il bug era presente fin dalle prime versioni beta della libreria
+   (anche prima di Infit 1) e provocava una lettura sbagliata
+   dell'array parse. Suppongo che parecchi bug che ho risolto "con la
+   forza bruta" erano dovuti a quest'errore.
+   (Segnalazione di Paolo Lucchesi)
+
+
+
+
+18 Ottobre 2002 - Da INFIT 2.0 A INFIT 2.1 BETA 1
+*************************************************
+
+FILE ITALIAN.H
+
+1. Aggiunte le due regole di stampa (arta) e (artdi) analoghe ad
+   (artin), (artsu) e (artda) già presenti nella libreria.
+
+2. Corretta la frase Miscellany 26. Da:
+        "(naturalmente, prima prendi ", (the) not_holding, ")"
+   a:
+        "(prima prendi ", (the) not_holding, ")"
+   La frase precedente era forse un po' troppo pesante.
+   (Segnalazione di Daniele A. Gewurz)
+
+3. Corretta la frase per il verbo Think. Da:
+        "Questa si che @`e una buona idea."
+   a:
+        "Questa s@`i che @`e una buona idea."
+   Mancava l'accento su sì.
+   (Segnalazione di Daniele A. Gewurz)
+
+4. Corretta la frase 1 del verbo Touch. Da:
+        "Tieni lontane le tue mani!"
+   a:
+        "Tieni a posto le mani!"
+   La stessa cosa per la frase 1 del verbo Squeeze.
+   (Segnalazione di Daniele A. Gewurz)
+
+5. Corretta la frase 2 del verbo ThrowAt. Da:
+        "Al momento cruciale ti saltano i nervi."
+   a:
+        "Nel momento cruciale ti manca il coraggio."
+   C'era un errore di traduzione dalla frase Inglese.
+   (Segnalazione di Daniele A. Gewurz)
+
+6. Corretta la frase 3 del verbo Enter. Da:
+        "Non puoi entrare dentro ", (the) x1, "chius",
+        (genderandnumber) x1, "."
+   a:
+        "Non puoi entrare dentro ", (the) x1, ".", (cisorare) x1, " chius",
+        (genderandnumber) x1, "."
+
+   (Segnalazione di Paolo Lucchesi)
+
+7. Corretta la frase 9 del verbo Take. Da:
+        print (The) x1, " non  ", (isorare) x1, "apert",
+        (genderandnumber) x1, "."
+   a:
+        print (The) x1, " non  ", (isorare) x1, " apert",
+        (genderandnumber) x1, "."
+
+   Mancava lo spazio prima di "apert".
+   (Segnalazione di Tommaso Caldarola)
+
+8. Corretta la frase 6 del verbo Take. Da:
+        if (noun has pluralname) print "Sembrano appartenere ";
+        else print "Sembra che appartenga ";
+        "a ", (the) x1, ".";
+   a:
+        if (noun has pluralname) print "Sembrano appartenere ";
+        else print "Sembra che appartenga ";
+        print_ret (arta) x1, ".";
+
+   Ho usato la nuova regola di stampa (arta).
+   (Segnalazione di Tommaso Caldarola)
+
+9. Corrette le routine di stampa (arta), (artda), (artin), ecc. in
+   modo da gestire correttamente la stampa dei nomi propri (oggetti
+   animate/talkable). Ad esempio ora la routine ArtA è la seguente:
+
+   [ ArtA o i;
+        print "a";
+        i = indef_mode; indef_mode = false;
+        if (o has proper)
+        { indef_mode = NULL; print " ", (PSN__) o; indef_mode = i; return; }
+        Articolo(o); indef_mode = i;
+   ];
+
+   Praticamente ho aggiunto uno spazio nella quarta riga prima di
+   (PSN__). Analogamente per tutte le altre routine di stampa delle
+   preposizioni articolate.
+   (Segnalazione di Tommaso Caldarola)
+
+10. Corretta la routine LanguageTimeOfDay perché la stringa TIME__TX
+    veniva stampata due volte. Visto che c'ero ho incluso la
+    possibilità di avere l'ora sia nella maniera anglosassone (con gli
+    "am" e i "pm") che in quella italiana con le ore da 0 a 23. Se si
+    vuole usare la versione anglosassone basta dichiarare un
+    "Constant ENG_TIME".
+    (Segnalazione di Vincenzo Scarpa)
+
+
+
+FILE REPLACE.H
+
+1. Sostituita la routine del parser PrintCommand per gestire le
+   situazioni in cui il parser completa il comando del giocatore. Ad
+   esempio prima si aveva una situazione del genere:
+
+        > Parla
+        (a il professore)
+
+   mentre adesso abbiamo la risposta corretta:
+
+        > Parla
+        (al professore)
+
+  (Segnalazione di Marco Vallarino)
+
+
+
+FILE ITALIANG.H
+
+1. Aggiunto il supporto per frasi tipo "parla con". Ora la grammatica
+   del verbo "Parla" è la seguente:
+
+   Verb 'parla'
+        * 'a'/'ad'/'all^'/'allo'/'alla'/'al'/'agli'/'ai'/
+          'alle' creature 'circa'/'su'/'sul'/
+          'sullo'/'sull^'/'sulla'/'sugli'/'sui'/
+          'sulle'/'di'/'dello'/'della'/'dell^'/'dei'/
+          'degli'/'delle' topic
+                                                 -> Tell
+        * 'a'/'ad'/'all^'/'allo'/'alla'/'al'/'agli'/'ai'/
+          'alle' creature
+                                                 -> Tell
+        * 'con' creature
+                                                 -> Tell
+        * 'con' creature 'circa'/'su'/'sul'/
+          'sullo'/'sull^'/'sulla'/'sugli'/'sui'/
+          'sulle'/'di'/'dello'/'della'/'dell^'/'dei'/
+          'degli'/'delle' topic
+                                                 -> Tell;
+
+    (Segnalazione di Paolo Lucchesi)

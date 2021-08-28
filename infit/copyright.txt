@@ -1,0 +1,41 @@
+ ============================================================================
+
+ Infit is copyright (c) 1997 - 2004 by Giovanni Riccardi.
+
+ Infit is free software. You can freely redistribute it with these
+ restrictions:
+ (a) distributed copies are not substantially different from the
+     original copy archived in the Infit Web Site
+     http://www.inform-italia.org
+ (b) distributed copies contain this copyright message.
+ (c) no profit is involved in the distribution.
+
+ Infit is distributed WITHOUT ANY WARRANTY.
+
+ Inform (compiler, library and manual) is copyright
+ (c) 1993-2002 by Graham Nelson
+
+ ============================================================================
+
+ Infit è copyright (c) 1997-2004 by Giovanni Riccardi
+ Tutti i diritti sono riservati.
+
+ Si permette l'uso, la copia e la modifica del software e della sua
+ documentazione. La ridistribuzione è soggetta alle restrizioni seguenti:
+
+ (a) Le copie distribuite non devono essere differenti dalla copia originale
+     archiviata dall'autore all'indirizzo http://www.inform-italia.org
+ (b) Le copie distribuite devono contenere questa nota informativa sul copyright.
+ (c) Le copie devono essere distribuite senza richiedere alcun compenso.
+
+ INFIT E' DISTRIBUITO SENZA ALCUNA GARANZIA SULL'UTILIZZO. L'AUTORE NON E'
+ RESPONSABILE DI QUALSIASI DANNO, DIRETTO O INDIRETTO, CONNESSO ALL'USO DI QUESTO
+ SOFTWARE.
+
+ Inform (compilatore, librerie e manuale) è copyright
+ (c) 1993-2002 by Graham Nelson
+
+ Sono disponibile per eventuali violazioni di copyright. Potete contattarmi via
+ posta elettronica.
+
+ ============================================================================

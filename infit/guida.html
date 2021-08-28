@@ -1,0 +1,374 @@
+<html>
+<head>
+<title>Guida di sopravvivenza a INFIT 2.2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+h1 {  font-family: Georgia, "Times New Roman", Times, serif; font-size: 32px; color: #000066}
+h4 {  font-family: Georgia, "Times New Roman", Times, serif; font-size: 18px; font-style: italic}
+p {  font-family: Georgia, "Times New Roman", Times, serif; font-size: 12px}
+h5 {  font-family: Georgia, "Times New Roman", Times, serif; font-size: 14px; font-weight: bold; font-variant: small-caps; color: #660033}
+-->
+</style>
+</head>
+
+<body bgcolor="#CDF2F5" text="#000000">
+<blockquote> 
+    <h1 align="center">GUIDA DI SOPRAVVIVENZA<br/>
+    A INFIT 2.5</h1>
+
+    <h4>&nbsp;</h4>
+  <h4>Presentazione</h4>
+  <p>A poco pi&ugrave; di sei mesi dalla 2.2 eccomi qui a presentare la versione 2.5 di INFIT. 
+    Premetto subito che si tratta di una versione intermedia prima del rilascio di 
+    INFIT 3 che seguir&agrave; questa release di qualche settimana.<br>
+    Versione intermedia significa essenzialmente che questo INFIT non &egrave; niente 
+    altro che la versione 2.2 con l'aggiunta del supporto Glulx e della compatibilit&agrave; con le recenti librerie 6/11 (che aggiungono alle 6/10, tra le  
+  molte correzioni e alcune nuove funzionalit&agrave;, anche nuovi messaggi).</p>
+  <p>La scelta di rilasciare una versione intermedia tra INFIT 2.2 e INFIT 3 
+  &egrave; dipesa soprattutto dal fatto di avere al pi&ugrave; presto una libreria  
+    compatibile con Glulx. Ringrazio naturalmente Alessandro Schillaci che 
+    per primo ha compreso questa necessit&agrave; e ha messo una pezza al mio INFIT 
+    con le sue librerie 2.2 modificate. Queste per&ograve; non utilizzavano il file  
+    Replace.h (che contiene varie personalizzazioni delle routine di 
+    libreria), non traducevano i nuovi messaggi introdotti nella libreria 6/11 
+  e c'erano alcune parti non compatibili ancora con Glulx.</p>
+  <p>La libreria modificata di Alessandro &egrave; stata importante perch&eacute; ha permesso 
+    a molti di cominciare a testare la piattaforma Glulx senza dover aspettare<br>
+    quel pigrone del sottoscritto (pare che io sia intelligente ma non mi 
+    applico, secondo un simpatico sondaggio recentemente fatto su IF-Italia).</p>
+  <p>:-)<br>
+  </p>
+  <p>Altro motivo del rilascio di una versione intermedia dipende dalla riscrittura 
+    quasi totale del codice che sto portando avanti con INFIT 3: sicuramente la 
+    prima versione che rilascer&ograve; sar&agrave; piena di errori e necessiter&agrave; di un test 
+    approfondito. Insomma, avere una libreria stabile &egrave; una necessit&agrave; per tutti 
+    gli autori di avventure che non possono pubblicare le loro opere con 
+  un parser pieno di bug.</p>
+  <p><br>
+  Segnalazioni di bug, commenti e osservazioni vanno fatti come sempre 
+      all'indirizzo infit@inform-italia.org anteponendo all'oggetto del 
+      messaggio la stringa [INFIT 2.5]. Al pi&ugrave; presto verr&agrave; preparata una pagina 
+    sul sito che si occuper&agrave; delle segnalazioni dei bug rendendo non pi&ugrave; necessario l'invio delle segnalazioni via email.</p>
+  <p><strong>HAPPY INFORMING!</strong></p>
+  <p style="float:right;">Giovanni Riccardi<br>
+  Terracina (LT), 14 Ottobre 2004</p>
+  <p>&nbsp;</p>
+  <h4>&nbsp;</h4>
+  <h4>&nbsp;</h4>
+  <p><a href="#note">Vai alle note di utilizzo della libreria</a></p>
+  <h4>&nbsp;</h4>
+  <h4>Presentazione alla versione 2.2 </h4>
+  <p>Dopo poco più di un anno dalla 2.1 e 3 versioni beta, eccoci finalmente giunti a questa nuova versione di <em>INFIT</em>. Ho notato con piacere che sempre pi&ugrave; persone si sono avvicinate al linguaggio inventanto da G. Nelson e questo mi d&agrave; ancora pi&ugrave; stimoli per continuare il mio lavoro iniziato ormai 8 anni fa.</p>
+  <p>In questo anno sono cambiate molte cose. Innanzitutto il mio sito dedicato a questo sistema per la creazione di IF ha cambiato indirizzo ed ora lo trovate su <a href="http://www.indorm-italia.org">www.inform-italia.org</a>. Poi, da poco, è uscita la nuova versione di Inform. Finalmente dopo diversi anni abbiamo un nuovo compilatore e una nuova libreria. Ormai il supporto bipiattaforma zcode/glulx è ufficiale e non più relegato ad una libreria ed un compilatore secondari. Questo mi ha spinto a prendere una decisione drastica, ma credo utile. Ho deciso di riprogrammare da zero <em>INFIT</em>. Purtroppo la libreria che avete tra le mani soffre di molti <em>errori di giovent&ugrave;</em>, errori dovuto principalmente alla mia inesperinza all'epoca in cui ho iniziato il lavoro. Con il passare degli anni pezze su pezze sono state aggiunte ai vari file, finch&eacute; tutto &egrave; diventato poco gestibile e poco modificabile (ma soprattutto poco personalizzabile da parte di tutti voi).</p>
+  <p>Per tutti questi motivi (da ora in poi mi occuper&ograve; della nuova versione), alcuni dei bug noti non verranno corretti, perché riguardano routine come la PrintCommand o la PrintInfinitive che saranno completamente riscritte nella nuova versione. Solo se ci saranno dei bug veramente gravi metter&ograve; le mani di nuovo su questi file. Mandatemi comunque le segnalazioni e date pure un'occhiata al file INFIT.OSS per alcune osservazioni sui problemi che affligono la libreria e sulle questioni ancora aperte che vorrei risolvere con la nuova versione.</p>
+  <p>Segnalazioni di bug, commenti e osservazioni vanno fatti come sempre
+  all'indirizzo infit@inform-italia.org anteponendo all'oggetto del messaggio la stringa [INFIT 2.2]. Non mandatemi più segnalazioni al mio indirizzo personale di posta elettronica. Mi riferisco soprattutto agli utenti di vecchia data con cui ho un rapporto più frequente via email. Naturalmente dovete usarlo per qualsiasi altro motivi e anche per questioni più generali riguardanti la mia libreria.</p>
+  <p><strong>HAPPY INFORMING!</strong></p>
+  <p style="float:right;">Giovanni Riccardi<br>
+  Terracina (LT), 24 Marzo 2004</p>
+
+  <h4>&nbsp;</h4>
+  <h4>&nbsp;</h4>
+  <h4>Presentazione alla versione 2.1</h4>
+  <p>Come &egrave; strana a volte la vita. Ci sono voluti tre anni per pubblicare la prima versione di INFIT e altri due per passare alla seconda versione. Ora invece in poco pi&ugrave; di due mesi sono riuscito a pubblicare una nuova release. Merito vostro, naturalmente, per l'interesse che avete mostrato nel mio lavoro e per i preziosi consigli che mi avete dato. Una ringraziamento speciale va ai miei beta-tester che mi hanno letteralmente tempestato di segnalazioni (INFIT 2.1 ha avuto ben 4 versioni beta nell'arco di due mesi): Francesco Cordella, Tommaso Caldarola, Paolo Lucchesi, Marco Vallarino, Daniele A. Gewurz, Vincenzo Scarpa, Marco Saccone e Giancarlo Niccolai.</p>
+  <p><strong>HAPPY INFORMING!</strong></p>
+  <p style="float:right;">Giovanni Riccardi<br>
+  Terracina (LT), 6 gennaio 2003</p>
+
+  <h4>&nbsp;</h4>
+  <h4>&nbsp;</h4>
+  <h4>Presentazione alla versione 2.0</h4>
+  <p>Finalmente eccoci giunti alla tanto attesa versione 2 di INForm in ITaliano (<em>INFIT</em>). Ad ormai 2 anni e un mese dalla pubblicazione della prima versione, quasi non ci speravo pi&ugrave; di riuscire nell'impresa. Sono abbastanza soddisfatto del lavoro. Moltissimi degli errori presenti nella versione precedente sono stati corretti e penso che di bug veramente gravi non ne sia rimasta veramente alcuna traccia.</p>
+  <p>La prima versione della libreria &egrave; stata pi&ugrave; volte criticata, non tanto per la grande quantit&agrave; di errori presenti (ed erano veramente tanti), ma piuttosto per l'assoluta mancanza di una guida che indicasse almeno le basi del linguaggio. Mi scuso vivamente di questo errore. Forse pensavo, erroneamente, che il target di <em>INFIT</em> fosse un appssionato (come me) soprattutto delle moltissime avventure (vecchie e nuove) presenti sulla scena internazionale dell'epoca (le avventure di Nelson, di Plotkin, tanto per fare due nomi), scritte quindi in Inglese. Pensavo quindi che questo target non avrebbe avuto alcuna difficolt&agrave; (linguistica) nel leggere il Designer's Manual di Graham Nelson.</p>
+  <p>D'altronde la mia esperienza con le avventure testuali &egrave; stata veramente atipica. Anche se &quot;le conoscevo di vista&quot;, il primo contatto vero e proprio &egrave; stato con Inform. Solo successivamente ho cominciato a giocare le molte avventure scritte con questo linguaggio. Da l&igrave; in poi sono partito in quarta: le avventure scritte con altri sistemi ed infine quelle italiane. Ma non voglio annoiarvi ulteriormente con l'argomento &quot;Giovanni Riccardi e le avventure testuali&quot; e passo ringraziare le molte persone che hanno contribuito al realizzarsi di tutto questo.</p>
+  <p>Ringrazio vivamente Francesco Cordella e Tommaso Caldarola per aver creduto fin dall'inizio nelle potezianzialit&agrave; di <em>INFIT</em> (d'altronde c'era anche la vecchia libreria di Nardinocchi a disposizione), segnalando i numerosi bug e dando preziosi consigli su come migliorare la libreria. Ringrazio tutto il gruppo di Roma presente alla famosa &quot;Cena Avventurosa&quot; dello scorso Febbraio che mi ha dato nuovo input per riprendere il lavoro interrrotto da diversi mesi. Tra questi un grazie speciale a Paolo Vece per le avventure    &quot;Infocom&quot; e a Sauron e Glorfindel (e ancora Paolo) per un'interessante mattinata alla mostra dei videogiochi.</p>
+
+  <p>Tra le persone da ringraziare non posso assolutamente dimenticare il boss, il grande Bonaventura di Bello, con cui da qualche mese ho anche il piacere di lavorare e che ogni tanto cerco di convincere a imparare Inform e a scrivere una nuova avventura.</p>
+  <p>In queste ultime settimane c'&egrave; stato uno &quot;strano&quot;, rinnovato interesse verso Inform, forse scatenato da un provocatorio post su icgat del grande Enrico Colombini (che ringrazio per questo oltre, naturalmente, che per le sue avventure). Non ho mai avuto cos&igrave; tante segnalazioni come in questi ultimi giorni di beta-testing. Per il prezioso lavoro devo ringraziare soprattutto Paolo Lucchesi, Daniele A. Gewurz e Marco Vallarino. </p>
+  <p>L'ultimo ringraziamento va, doverosamente, a Graham Nelson per aver creato Inform e senza il quale non starei neanche scrivendo queste note. </p>
+  <p>Penso di aver finito con i ringraziamenti. Mi scuso se ho dimenticato qualcuno, potete sempre scrivermi in e-mail lamentandovi per questa mia mancanza. Come direbbe qualcuno &quot;finalmente dopo due anni INFIT 2 &egrave; qui!&quot; e spero vivemente che il fantasma di Francesco Cordella la smetta di tormentarmi ogni volta che mi siedo davanti al PC.</p>
+  <p><strong>HAPPY INFORMING A TUTTI!</strong></p>
+  <p style="float:right;">Giovanni Riccardi<br>
+  Terracina (LT), 9 Ottobre 2002</p>
+  
+  <h4>&nbsp;</h4>
+  <h4>&nbsp;</h4>
+  <h4>Introduzione</h4>
+<p>Quello che avete tra le mani non &egrave; un vero e proprio manuale di Inform/INFIT ma piuttosto un insieme di note per la scrittura di avventure testuali utilizzando la libreria italiana. Per un manuale introduttivo all'utilizzo di Inform vi consiglio la <em>Inform Beginner's Guide</em> di Roger Firth e Sonia Kesserich, di cui è disponibile una versione preliminare tradotta in Italiano (<em>Guida a Inform per Principianti</em>) sul sito di Inform in Italiano a cui vi rimando per altre informazioni sulla documentazione disponibile (ad esempio il manuale scritto da Vincenzo Scarpa).</p>
+
+<p>Per imparare bene come si programma un'avventura non c'&egrave; niente di meglio 
+  che leggere il codice sorgente di di un classico dell'Interactive Fiction. E' 
+  finalmente disponibile il codice sorgente commentato di &quot;Avventura&quot; 
+  e &quot;Negozio di Giocattoli&quot; traduzioni di due dei giochi di esempio 
+  inclusi nella versione originale di Inform.<br>
+    Per facilitare i neofiti ho pensato di includere in questa guida lo scheletro 
+    di un'avventura, dal quale si pu&ograve; partire per programmare il proprio 
+    gioco. </p>
+  <p>Se ve la cavate un po' con l'inglese la Bibbia di 
+    Inform rimane sempre L'<em>Inform Designer's Manual 4th ed.</em> di Graham Nelson al quale vi rimando per questioni pi&ugrave; tecniche. </p>
+
+  <p>Se avete letto o state leggendo questo manuale, questa guida costituisce 
+    il suo complemento per le questioni riguardanti la libreria italiana.</p>
+<p>&nbsp;</p>
+  <h4>&nbsp;</h4>
+  <h4><a name="note"></a>Note per l'utilizzo di INFIT</h4>
+<h5>Definizione del genere degli oggetti</h5>
+<p>Il parser di Inform &egrave; nato per riconoscere l'Inglese e la libreria Italiana 
+  ne &egrave;, per la maggior parte, una traduzione. Come molti sapranno in Inglese 
+  non c'&egrave; una distinzione di fatto tra nomi di genere maschile e femminile 
+  (per esempio nell'accordarsi con un aggettivo) e quindi non &egrave; necessario 
+  specificare il genere dell'oggetto in fase di programmazione. In Italiano questo 
+  &egrave; purtroppo necessario poich&egrave; il parser deve poter scegliere il 
+  giusto messaggio da inviare al giocatore. Per esempio, se il giocatore<br>
+
+  scrive:</p>
+<p><i>&gt;PRENDI SCATOLA<br>
+  </i> </p>
+  <p> il parser deve decidere se scrivere PRESA oppure PRESO. Tutto questo si 
+    risolve semplicemente aggiungendo un attributo &quot;female&quot; agli oggetti 
+    di genere femminile. Il maschile viene riconosciuto automaticamente (o per 
+    meglio dire il parser assume che gli oggetti siano maschili, salvo poi specificare 
+    i femminili).</p>
+<h5>&nbsp;</h5>
+<h5>Definizione del numero dell'oggetto</h5>
+
+<p>Come per l'Inglese si aggiunge un attributo &quot;pluralname&quot; alla definizione 
+  di un oggetto plurale.</p>
+<p>&nbsp;</p>
+<h5>Compilare un'avventura scritta con INFIT</h5>
+<p>La sintassi corretta per compilare una avventura utilizzando INFIT &egrave; 
+  la seguente:</p>
+  <pre>inform +language_name=italian &lt;nome_del_file.inf&gt;
+</pre>
+
+  <p>dove al posto di <i>inform</i> dovete inserire il nome del compilatore per 
+    il sistema operativo che state usando. Ad esempio sotto Windows il compilatore 
+    si chiama &quot;infrmw32.exe&quot;. Date un'occhiata pi&ugrave; avanti allo 
+    scheletro dell'avventura per sapere in che ordine vanno incluse le varie librerie 
+    di INFIT.</p>
+  <p>&nbsp;</p>
+  <h5>Compilare un'avventura per la piattaforma Glulx</h5>
+  <p>Bisogna aggiungere il parametro -G alla chiamata del compilatore:</p>
+  <pre>inform -G +language_name=italian &lt;nome_del_file.inf&gt;
+  </pre>
+  <p>&nbsp;</p>
+  <h5>Riconoscere genere e numero degli oggetti</h5>
+  <p>Nel corso della programmazione di un'avventura vi capiter&agrave; certamente 
+    di dover fare riferimento ad un oggetto che non conoscete a priori, e nello 
+    stampare un messaggio, di dover conoscere il suo genere e il suo numero. La 
+    libreria italiana contiene la comoda funzione di stampa &quot;GenderAndNumber&quot; 
+    che fa proprio questo. Essendo una funzione di stampa va chiamata nel seguente 
+    modo all'interno del codice:</p>
+
+<p> (genderandnumber) object</p>
+  <p> Per esempio &quot;Avventura&quot; contiene una classe Treasure che identifica 
+    i tesori che il giocatore deve trovare. Nella definizione del tesoro viene 
+    specificato il suo genere e il suo numero. La classe per&ograve; deve gestire 
+    i messaggi in modo che vadano bene per qualsiasi oggetto che vi appartiene. 
+    Ecco la definizione della classe con la gestione dei verbi Take (prendi) e 
+    Drop (posa, lascia):<br>
+</p>
+<pre>Class Treasure
+	with depositpoints 10,
+   	after [; 
+		Take: if (location==Inside_Building)
+   				score=score-self.depositpoints;
+   			  score=score+5;
+   			  if (noun hasnt treasure_found)
+   			  { give noun treasure_found;
+   				treasures_found++;
+   				score=score+2;
+   			  }
+   			  print &quot;Pres&quot;, (genderandnumber) noun, &quot;!&quot;;rtrue;
+   		Drop: score=score-5;
+   			  if (location==Inside_Building)
+   			  { score=score+self.depositpoints;
+   				print &quot;Depositat&quot;, (genderandnumber) noun,
+   					  &quot; al sicuro!&quot;;
+   			  } rtrue; 
+   ]; </pre>
+
+<p>&nbsp;</p>
+<h5>Alcune funzioni di stampa contenute nella libreria</h5>
+<p> La libreria italiana contiene, per uso interno, alcune comode funzioni di 
+  stampa che per&ograve; possono essere tranquillamente<br>
+  richiamate nella programmazione di un'avventura. Ecco l'elenco:</p>
+  <ul>
+    <li> 
+      <p><b>(thatorthose) obj</b>: stampa &quot;quello, quella, quelli, quelle&quot; 
+        a seconda di genere e numero.</p>
+
+    </li>
+    <li> 
+      <p><b>(itorthem) obj</b>: stampa &quot;lo, la, li, le&quot; a seconda di 
+        genere e numero.</p>
+    </li>
+    <li> 
+      <p><b>(cthatorthose) obj</b>: stampa &quot;Quello, Quella, Quelli, Quelle&quot; 
+        a seconda di genere e numero.</p>
+
+    </li>
+    <li> 
+      <p><b>(isorare) obj</b>: stampa &quot;sono, &egrave;&quot; a seconda del 
+        numero.</p>
+    </li>
+    <li> 
+      <p><b>(cisorare) obj</b>: stampa &quot;Sono, E'&quot; a seconda del numero.</p>
+
+    </li>
+    <li> 
+      <p><b>(whomorwhich2) obj</b>: stampa &quot;il quale, la quale, i quali, 
+        le quali&quot; a seconda di genere e numero.</p>
+    </li>
+    <li> 
+      <p><b>(artda) obj</b>: stampa la preposizione articolata &quot;da&quot; 
+        + articolo, ad esempio &quot;dallo&quot;, &quot;dalla&quot;, ecc.</p>
+
+    </li>
+    <li> 
+      <p><b>(artsu) obj</b>: stampa la preposizione articolata &quot;su&quot; 
+        + articolo, ad esempio &quot;sullo&quot;, &quot;sulla&quot;, ecc.</p>
+    </li>
+    <li> 
+      <p><b>(artin) obj</b>: stampa la preposizione articolata &quot;in&quot; 
+        + articolo, ad esempio &quot;nello&quot;, &quot;nella&quot;, ecc.</p>
+
+    </li>
+    <li> 
+      <p><strong>(arta) obj</strong>: stampa la preposizione articolata &quot;a&quot; 
+        + articolo, ad esempio &quot;allo&quot;, &quot;alla&quot;, ecc.</p>
+    </li>
+    <li>
+
+      <p><strong>(artdi) obj</strong>: stampa la preposizione articolata &quot;di&quot; 
+        + articolo, ad esempio &quot;dello&quot;, &quot;della&quot;, ecc.</p>
+    </li>
+  </ul>
+  <p>dove con <b>obj</b> intendo naturalmente l'oggetto al quale si riferisce 
+    la funzione di stampa.</p>
+
+  <p><strong>NOTA</strong>: a partire dalla versione 2.1 le funzioni di stampa 
+    (isorare), (cisorare), (artda), (artsu), (artin), (arta) e (artdi) gestiscono 
+    anche la situazione in cui l'oggetto &egrave; il giocatore. Ad esempio in 
+    (isorare) viene stampato &quot;sei&quot;.</p>
+  <p>&nbsp;</p>
+<h5>Altre funzioni della libreria</h5>
+<p> Ecco un elenco delle altre funzioni contenute nella libreria:</p>
+<ul>
+    <li>
+
+      <p><b>PrintInfinitive()</b>: restituisce la forma all'infinito del verbo 
+        dato nell'ultimo comando.</p>
+    </li>
+    <li>
+      <p><b>PrintPrep()</b>: restituisce la preposizione (se esiste) associata 
+        al verbo dato nell'ultimo comando.<br>
+      </p>
+    </li>
+</ul>
+
+<p>Per maggiori informzioni sull'utilizzo di queste due funzioni, date un'occhiata 
+  ai messaggi di libreria <i>Miscellany 48</i> e <i>Miscellany 49</i> contenuti 
+  nel file Italian.h</p>
+  <p><strong>NOTA</strong>: Ho intenzione di eliminare queste due funzioni con 
+    la versione 2.2. In origine le avevo inserite per gestire la stampa dei comandi 
+    al posto della funzione di libreria PrintCommand(), ma sto gi&agrave; riprogettando 
+    quest'ultima in modo da stampare anche verbi all'infinito e preposizioni e 
+    in modo che possiate aggiungere anche il supporto a verbi non inclusi nella 
+    grammatica standard. </p>
+<h5>Prompt alternativo</h5>
+<p>Se dichiarate un &quot;Constant PROMPT&quot; prima dell'inclusione dei file 
+  di libreria la vostra avventura user&agrave; un prompt alternativo al classico 
+  &quot;&gt;&quot;. Il parser porr&agrave; al giocatore domande del tipo &quot;Cosa 
+  vuoi fare ora?&quot;, ecc. La procedura che gestisce questo tipo di prompt stampa 
+  in maniera (pseudo-)casuale un messaggio scelto tra quindici. </p>
+
+<p>&nbsp;</p>
+<h5>Sostituire i messaggi standard di libreria</h5>
+  <p>Normalmente, programmando un'avventura testuale, si scrivono i messaggi solo 
+    per quelle azioni che si riferiscono agli oggetti importanti del gioco. Per 
+    tutto il resto ci pensa il parser con la sua ricca libreria di messaggi standard. 
+    Ma cosa si deve fare se, per qualche motivo, volete cambiare alcuni dei messaggi 
+    standard? Basta dichiarare un oggetto LibraryMessages come mostrato qui di 
+    seguito:</p>
+  <pre>Object  LibraryMessages
+  with  before [;
+          Eat: &quot;Il nuovo messaggio per il verbo mangiare...&quot;;
+          Drink: &quot;Il nuovo messaggio per il verbo bere...&quot;;
+        ];
+</pre>
+<p><br>
+  Quest'oggetto deve essere incluso tra &quot;Include Parser&quot; e &quot;Include 
+  Verblib&quot;. Ricordatevi che se le procedure che stampano i messaggi dei verbi 
+  ritornano <i>FALSE</i>, verr&agrave; stampato anche il messaggio standard.</p>
+
+<p>&nbsp;</p>
+<h5>Il file Replace.h</h5>
+  <p>Il file &quot;replace.h&quot; contiene delle funzioni che sostituiscono alcune 
+    routine presenti nella libreria che stampavano le informazioni sulla versione 
+    della libreria stessa. Mettendo un &quot;Include &quot;replace&quot;&quot; 
+    subito dopo &quot;Include &quot;Verblib&quot;&quot; (importante metterlo subito 
+    dopo!) queste informazioni verranno tradotte in Italiano. Vedi lo scheletro 
+    dell'avventura che segue.</p>
+
+  <p><strong>NOTA</strong>: Gi&agrave; dalla versione 2.1 questo file contiene 
+    alcune altre funzioni che sostituiscono quella della libreria inglese.</p>
+  <p>&nbsp;</p>
+  <h5>CARATTERI ACCENTATI E COMPILATORE LINUX</h5>
+  <p>Durante il beta testing della versione 2.1 &egrave; stato segnalato che il 
+    compilatore Linux non ne vuole sapere di compilare un gioco a causa delle 
+    istruzioni ZCharacter inserite all'inizio del file Italian.h. Se vi capita 
+    una cosa del genere inserite semplicemente un commento all'inizio della riga.</p>
+  <h4>&nbsp;</h4>
+
+  <h4>Scheletro dell'avventura</h4>
+<p>Ecco lo scheletro di un'avventura che utilizza INFIT. Penso sia gi&agrave; 
+  qualcosa prima della pubblicazione del manuale.</p>
+  <pre>Constant Story &quot;UNA BELLA AVVENTURA^&quot;;
+Constant Headline &quot;^La nuova avventura di Giovanni Riccardi&quot;;</pre>
+<pre>Serial &quot;021009&quot;;
+Release 1;</pre>
+
+<pre>Include &quot;Parser&quot;;
+Include &quot;VerbLib&quot;;
+Include &quot;replace&quot;;</pre>
+<pre>Object Prima_Stanza &quot;La prima stanza&quot;
+  with name &quot;stanza1&quot; &quot;prima&quot; &quot;stanza&quot;, 
+       description &quot;Ti trovi nella prima stanza di questa nuova avventura.&quot;,
+       w_to Stanza2, 
+       <i>(ecc...)</i>,
+   has light;</pre>
+
+<pre>Object -&gt; Oggetto1 &quot;Primo oggetto&quot;
+  with name &quot;primo&quot; &quot;oggetto&quot; &quot;oggetto1&quot;,
+       description &quot;Il primo oggetto&quot;,
+       <i>(altre propriet&agrave; dell'ogetto)</i>,
+   has attributo1, attributo2, ecc.;</pre>
+
+<pre></pre>
+<pre>[ Initialise;
+   location = Prima_Stanza;
+   print &quot;^^^^Benvenuti in questa nuova Avventura!^^&quot;;
+];</pre>
+<pre>Include &quot;ItalianG&quot;;
+
+<i>(Altre definizioni dei verbi)</i>
+</pre>
+<p>&nbsp;</p>
+  <h4>&nbsp;</h4>
+  <h4>INFORMazioni utili</h4>
+
+<h5>Informazioni: Il Sito Web Italiano di Inform:</h5>
+<p><a href="http://www.inform-italia.org" target="_blank"><b>http://www.inform-italia.org</b></a></p>
+<h5>Sito Web Ufficiale di Inform:</h5>
+<p><a href="http://www.inform-fiction.org" target="_blank"><b>http://www.inform-fiction.org</b></a></p>
+<h5>E-mail di INFIT:</h5>
+<p><a href="mailto:infit@inform-italia.org"><b>infit@inform-italia.org</b></a></p>
+<p>&nbsp;</p>
+<p><br>
+</p>
+</blockquote>
+</body>
+
+</html>
